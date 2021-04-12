@@ -18,6 +18,7 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
@@ -31,9 +32,11 @@ describe('AppComponent', () => {
   it('should have links to all sub-pages', () => {
     const links = fixture.debugElement.$$('a.app-nav__link');
 
-    // I would suggest not to test the "click" itself here, because we can expect Angular itself to work
     expect(links.length).toEqual(2);
-    expect(links[0].nativeElement).toHaveAttribute('routerlink', '/');
-    expect(links[1].nativeElement).toHaveAttribute('routerlink', '/something');
+
+    /* I would suggest not to test the "click" itself here, because we can expect Angular itself to work. The routerLink
+    * directive also sets the href attribute on the elements, so we can test if they have been set. */
+    expect(links[0].nativeElement).toHaveAttribute('href', '/');
+    expect(links[1].nativeElement).toHaveAttribute('href', '/users');
   });
 });

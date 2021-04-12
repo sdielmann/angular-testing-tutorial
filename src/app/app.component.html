@@ -2,11 +2,13 @@
 <header role="banner" class="app-header">
   <nav class="app-nav">
     <ul>
-      <li>
-        <a routerLink="/" routerLinkActive="active" class="app-nav__link">Start</a>
-      </li>
-      <li>
-        <a routerLink="/something" routerLinkActive="active" class="app-nav__link">Something</a>
+      <li *ngFor="let link of links">
+        <a [routerLink]="link.url"
+           [routerLinkActiveOptions]="{exact: true}"
+           routerLinkActive="active"
+           class="app-nav__link">
+          {{ link.label }}
+        </a>
       </li>
     </ul>
   </nav>
