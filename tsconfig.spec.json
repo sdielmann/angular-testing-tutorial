@@ -10,10 +10,6 @@
       "@testing-library/jest-dom"
     ]
   },
-  "files": [
-    "src/test.ts",
-    "src/polyfills.ts"
-  ],
   "include": [
     "testing/**/.ts",
     "src/**/*.spec.ts",
