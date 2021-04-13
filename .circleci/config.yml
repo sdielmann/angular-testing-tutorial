@@ -25,7 +25,8 @@ jobs:
           command: ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info
           environment:
             COVERALLS_SERVICE_NAME: circleci
-            COVERALLS_GIT_BRANCH: {{ .Branch }}
+            COVERALLS_GIT_BRANCH: $CIRCLE_BRANCH
+            COVERALLS_SERVICE_JOB_NUMBER: $CIRCLE_BUILD_NUM
       - store_test_results:
           path: ./reports/junit/
 
