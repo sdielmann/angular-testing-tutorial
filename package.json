@@ -67,6 +67,7 @@
     "express-winston": "^4.1.0",
     "faker": "^5.4.0",
     "jest": "^26.6.3",
+    "jest-junit": "^12.0.0",
     "jest-preset-angular": "^8.3.2",
     "json-server": "^0.16.3",
     "protractor": "~7.0.0",

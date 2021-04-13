@@ -7,18 +7,21 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: npm set cache .npm
-      - run: npm ci
+          key: npm-{{ .Branch }}
+      - run:
+          name: "Install dependencies with npm"
+          command: npm set cache .npm && npm ci
       - save_cache:
-          key: npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: npm-{{ .Branch }}
           paths:
             - ".npm"
       - run:
-          name: "Run Unit Tests"
-          command: npm run test -- --coverage
-      - store_artifacts:
-          path: coverage
+          name: "Run unit tests with jest and collect coverage"
+          command: npm run test -- --ci --runInBand --coverage --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
 
 
 workflows:
