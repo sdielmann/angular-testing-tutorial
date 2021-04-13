@@ -17,7 +17,7 @@ jobs:
             - ".npm"
       - run:
           name: "Run unit tests with jest and collect coverage"
-          command: npm run test -- --ci --runInBand --coverage --reporters=default --reporters=jest-junit
+          command: npm run test -- --ci --runInBand --coverage --reporters=default --reporters=jest-junit && coveralls < coverage/lcov.info
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - store_test_results:
