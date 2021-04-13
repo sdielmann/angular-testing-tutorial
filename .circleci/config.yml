@@ -20,16 +20,16 @@ jobs:
           command: npm run test -- --ci --runInBand --coverage --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
       - run:
           name: "Send coverage report"
           command: ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info
           environment:
+            COVERALLS_FLAG_NAME: Unit
             COVERALLS_SERVICE_NAME: circleci
-            COVERALLS_GIT_BRANCH: $CIRCLE_BRANCH
-            COVERALLS_SERVICE_JOB_NUMBER: $CIRCLE_BUILD_NUM
-      - store_test_results:
-          path: ./reports/junit/
-
+            COVERALLS_GIT_BRANCH: << pipeline.git.branch >>
+            COVERALLS_SERVICE_JOB_NUMBER: << pipeline.number >>
 
 workflows:
   version: 2
