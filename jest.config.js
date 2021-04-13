@@ -1,10 +1,12 @@
 module.exports = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/testing/jest-setup.ts'],
+  coverageDirectory: "<rootDir>/coverage",
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "/e2e/",
-    "/testing/"
+    "/testing/",
+    "**/*.js"
   ],
   transform: {
     "^.+\\.svg$": 'ts-jest'
