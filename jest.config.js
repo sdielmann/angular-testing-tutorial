@@ -5,8 +5,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "/e2e/",
-    "/testing/",
-    "**/*.js"
+    "/testing/"
   ],
   transform: {
     "^.+\\.svg$": 'ts-jest'
