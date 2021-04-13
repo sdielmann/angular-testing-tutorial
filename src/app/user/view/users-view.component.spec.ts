@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { User } from '@app/models';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { ApiService } from '../../core/api/api.service';
 import { UsersViewComponent } from './users-view.component';
 
@@ -93,6 +94,24 @@ describe('UsersViewComponent', () => {
   });
 
   describe('View', () => {
+    it('should initially display a loader', fakeAsync(() => {
+      api.getUsers.mockReturnValue(of(users).pipe(delay(1000)));
+
+      // The component needs to be recreated in this case
+      fixture = TestBed.createComponent(UsersViewComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.$('.loader')).toBeTruthy();
+      expect(fixture.debugElement.$('table')).toBeFalsy();
+
+      tick(1000);
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.$('.loader')).toBeFalsy();
+      expect(fixture.debugElement.$('table')).toBeTruthy();
+    }));
+
     it('should display one row for each user', () => {
       const rows = fixture.debugElement.$$('.user-row');
 
@@ -112,6 +131,7 @@ describe('UsersViewComponent', () => {
       headers[0].triggerEventHandler('click', null);
 
       expect(spy).toHaveBeenCalledWith('fullName');
+      expect(headers[0].$('.sort-icon').nativeElement).toHaveClass('fa-chevron-up');
     });
   });
 });
