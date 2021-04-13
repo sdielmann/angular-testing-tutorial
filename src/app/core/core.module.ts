@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -9,10 +10,10 @@ import { AppRoutingModule } from './routing/app-routing.module';
  * The AppModule should only be responsible for bootstrapping the application.
  */
 @NgModule({
-  declarations: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     SharedModule
   ],
   exports: [

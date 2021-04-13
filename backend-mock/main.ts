@@ -13,10 +13,18 @@ const router = jsonServer.router(db.getPlainDatabase());
 // @ts-ignore
 router.db._.id = '_id';
 
+// Intentional delay of requests
+server.use((req, res, next) => {
+  setTimeout(next,1000);
+});
+
 // General middleware
 server.use(expressLogger);
 server.use(jsonServer.bodyParser);
 server.use(jsonServer.defaults({logger: false}));
+server.use(jsonServer.rewriter({
+  '/api/*': '/$1'
+}));
 
 // Routers and actual data
 server.use(router);

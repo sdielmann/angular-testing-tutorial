@@ -1,3 +1,53 @@
 :host {
   display: block;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+
+  thead {
+    border-bottom: 1px solid #f7f7f9;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 1rem;
+  }
+
+  tr {
+    height: 5rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f7f7f9;
+  }
+
+  th {
+    border-bottom: 2px solid transparent;
+
+    .sort-icon {
+      margin-left: 0.5em;
+      visibility: hidden;
+    }
+
+    &.sort-active {
+      border-bottom-color: #105b82;
+
+      .sort-icon {
+        visibility: visible;
+      }
+    }
+
+    &.sort-header:hover {
+      cursor: pointer;
+      border-bottom-color: #198fcd;
+    }
+  }
+
+}
+
+.loader {
+  text-align: center;
+}

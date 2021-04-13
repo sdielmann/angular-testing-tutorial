@@ -17,6 +17,7 @@
       "dom"
     ],
     "paths": {
+      "@app/models": ["src/app/core/api/models/index.ts"],
       "@app/shared": ["src/app/shared/index.ts"]
     }
   },

@@ -1,1 +1,39 @@
 <h1>Users</h1>
+
+<table *ngIf="users; else loader">
+  <thead>
+  <tr>
+    <th>#</th>
+    <ng-template [ngTemplateOutlet]="th" [ngTemplateOutletContext]="{label: 'Name', key: 'fullName'}"></ng-template>
+    <ng-template [ngTemplateOutlet]="th" [ngTemplateOutletContext]="{label: 'Age', key: 'age'}"></ng-template>
+    <ng-template [ngTemplateOutlet]="th" [ngTemplateOutletContext]="{label: 'Phone', key: 'phone'}"></ng-template>
+    <ng-template [ngTemplateOutlet]="th" [ngTemplateOutletContext]="{label: 'Email', key: 'email'}"></ng-template>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users; let i = index;">
+    <td>{{ i + 1 }}</td>
+    <td>{{ user.fullName }}</td>
+    <td>{{ user.age }}</td>
+    <td>
+      <a [href]="user.phone | phoneHref">{{ user.phone }}</a>
+    </td>
+    <td>
+      <a [href]="user.email | emailHref">{{ user.email }}</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #th let-label="label" let-key="key">
+  <th class="sort-header" [class.sort-active]="currentSort.key === key" (click)="sortBy(key)">
+    <span>{{ label }}</span>
+    <i class="fas fa-fw sort-icon"
+       [class.fa-chevron-up]="currentSort.asc"
+       [class.fa-chevron-down]="!currentSort.asc"></i>
+  </th>
+</ng-template>
+
+<ng-template #loader>
+  <p class="loader">Loading users...</p>
+</ng-template>
