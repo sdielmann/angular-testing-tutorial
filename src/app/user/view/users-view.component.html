@@ -11,14 +11,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users; let i = index;">
-    <td>{{ i + 1 }}</td>
-    <td>{{ user.fullName }}</td>
-    <td>{{ user.age }}</td>
-    <td>
+  <tr *ngFor="let user of users; let i = index;" class="user-row">
+    <td class="col-index">{{ i + 1 }}</td>
+    <td class="col-name">{{ user.fullName }}</td>
+    <td class="col-age">{{ user.age }}</td>
+    <td class="col-phone">
       <a [href]="user.phone | phoneHref">{{ user.phone }}</a>
     </td>
-    <td>
+    <td class="col-email">
       <a [href]="user.email | emailHref">{{ user.email }}</a>
     </td>
   </tr>
