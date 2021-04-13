@@ -1,5 +1,6 @@
 [![License](https://img.shields.io/github/license/sdielmann/angular-testing-tutorial)](./LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/github/sdielmann/angular-testing-tutorial)](https://circleci.com/gh/sdielmann/angular-testing-tutorial)
+[![Coverage Status](https://coveralls.io/repos/github/sdielmann/angular-testing-tutorial/badge.svg?branch=master)](https://coveralls.io/github/sdielmann/angular-testing-tutorial?branch=master)
 
 # Steffen Dielmann's Tutotial Project for Unit Tests in Angular
 
