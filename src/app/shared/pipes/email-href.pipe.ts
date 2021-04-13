@@ -19,7 +19,7 @@ export class EmailHrefPipe implements PipeTransform {
 
     let res = '';
 
-    if (options?.addPrefix) {
+    if (options.addPrefix) {
       res += 'mailto:';
     }
 

@@ -91,6 +91,16 @@ describe('UsersViewComponent', () => {
       expect(component.currentSort.key).toEqual('email');
       expect(component.currentSort.asc).toEqual(false);
     });
+
+    it('should not sort when no users are in the list or the key is invalid', () => {
+      component.users = [];
+      component.sortBy('age');
+      expect(component.currentSort.key).toEqual('fullName');
+
+      component.users = users;
+      component.sortBy('bla');
+      expect(component.currentSort.key).toEqual('fullName');
+    });
   });
 
   describe('View', () => {
