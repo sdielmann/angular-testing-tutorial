@@ -5,6 +5,6 @@ Feature: Running Cucumber with Protractor
   In order to run my E2E tests
 
   Scenario: Protractor and Cucumber Test
-    Given I navigate to "http://localhost:4200"
-    When I click on "CLI Documentation"
-    Then I should be at "https://angular.io/cli"
+    Given I navigate to "http://host.docker.internal:4200"
+    When I click on "Users"
+    Then I should be at "http://host.docker.internal:4200/users"

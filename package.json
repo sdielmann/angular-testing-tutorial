@@ -7,7 +7,6 @@
     "build": "ng build",
     "test": "jest",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "backend-mock": "ts-node --project backend-mock/tsconfig.json -r ./backend-mock/main.ts"
   },
   "author": {
@@ -44,7 +43,7 @@
     "@angular-eslint/template-parser": "1.2.0",
     "@angular/cli": "~11.2.2",
     "@angular/compiler-cli": "~11.2.3",
-    "@cucumber/cucumber": "^7.0.0",
+    "@cucumber/cucumber": "^7.3.1",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.0",
     "@testing-library/dom": "^7.30.3",
     "@testing-library/jest-dom": "^5.11.10",
@@ -72,7 +71,7 @@
     "jest-preset-angular": "^8.3.2",
     "json-server": "^0.16.3",
     "protractor": "~7.0.0",
-    "protractor-cucumber-framework": "^7.0.2",
+    "protractor-cucumber-framework": "^8.2.6",
     "ts-node": "^8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.7",

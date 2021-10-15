@@ -3,7 +3,6 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 const path = require('path');
 const fs = require('fs');
-const tsNode = require('ts-node');
 
 const reportDir = path.resolve(__dirname, 'report');
 const timestamp = new Date()
@@ -16,34 +15,39 @@ const timestamp = new Date()
  * @type { import("protractor").Config }
  */
 exports.config = {
+  baseUrl: 'http://host.docker.internal:4200/',
   specs: ['features/**/*.feature'],
+
+  directConnect: false,
+  seleniumAddress: 'http://localhost:4444',
+  capabilities: {
+    browserName: 'chrome'
+  },
+
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   cucumberOpts: {
+    'require-module': 'ts-node/register',
     require: [
       'src/setup.ts',
       'src/steps/**/*.ts'
     ],
-    'require-module': "ts-node/register",
     format: [
       '@cucumber/pretty-formatter',
       `html:${reportDir}/report_${timestamp}.html`
     ]
   },
   allScriptsTimeout: 11000,
-  capabilities: {
-    browserName: 'chrome'
-  },
-  directConnect: true,
-  SELENIUM_PROMISE_MANAGER: false,
-  baseUrl: 'http://localhost:4200/',
+
   onPrepare() {
-    tsNode.register({
+    require('ts-node').register({
       project: path.join(__dirname, './tsconfig.json')
     });
 
     if (!fs.existsSync(reportDir)){
       fs.mkdirSync(reportDir, {recursive: true});
     }
-  }
+  },
+
+  SELENIUM_PROMISE_MANAGER: false
 };

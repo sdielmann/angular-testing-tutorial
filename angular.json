@@ -66,6 +66,7 @@
           "options": {
             "browserTarget": "angular-boilerplate:build",
             "port": 4200,
+            "allowedHosts": ["host.docker.internal"],
             "proxyConfig": "src/proxy.config.js"
           },
           "configurations": {
@@ -87,18 +88,6 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-boilerplate:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "angular-boilerplate:serve:production"
-            }
           }
         }
       }
