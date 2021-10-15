@@ -66,7 +66,9 @@
           "options": {
             "browserTarget": "angular-boilerplate:build",
             "port": 4200,
-            "allowedHosts": ["host.docker.internal"],
+            "allowedHosts": [
+              "host.docker.internal"
+            ],
             "proxyConfig": "src/proxy.config.js"
           },
           "configurations": {
@@ -88,6 +90,37 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "angular-boilerplate:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-boilerplate:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "angular-boilerplate:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-boilerplate:serve:production"
+            }
           }
         }
       }

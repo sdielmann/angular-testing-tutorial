@@ -1,10 +1,10 @@
 #features/test.feature
-Feature: Running Cucumber with Protractor
-  As a user of Protractor
+Feature: Running Cucumber with Cypress
+  As a user of Cypress
   I should be able to use Cucumber
   In order to run my E2E tests
 
-  Scenario: Protractor and Cucumber Test
-    Given I navigate to "http://host.docker.internal:4200"
+  Scenario: Cypress with Cucumber Test
+    Given I navigate to "localhost:4200"
     When I click on "Users"
-    Then I should be at "http://host.docker.internal:4200/users"
+    Then I should be at "/users"
