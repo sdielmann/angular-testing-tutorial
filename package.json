@@ -7,10 +7,9 @@
     "build": "ng build",
     "test": "jest",
     "lint": "ng lint",
-    "backend-mock": "ts-node --project backend-mock/tsconfig.json -r ./backend-mock/main.ts",
-    "e2e": "ng e2e",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "e2e:open": "cypress open -C e2e/cypress.json",
+    "e2e:run": "cypress run -C e2e/cypress.json",
+    "backend-mock": "ts-node --project backend-mock/tsconfig.json -r ./backend-mock/main.ts"
   },
   "author": {
     "name": "Steffen Dielmann",
