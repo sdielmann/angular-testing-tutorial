@@ -86,7 +86,8 @@
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,
-    "stepDefinitions": "e2e/integration",
-    "commonPath": "e2e/integration/common"
+    "nonGlobalStepBaseDir": "e2e/features",
+    "commonPath": "common",
+    "stepDefinitions": "e2e/features"
   }
 }
