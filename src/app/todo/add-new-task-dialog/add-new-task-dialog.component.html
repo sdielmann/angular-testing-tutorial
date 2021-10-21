@@ -1,0 +1,32 @@
+<form [formGroup]="form" (submit)="addNewTask()">
+  <div class="p-fluid formgrid grid">
+    <div class="field col-12">
+      <label for="task-desc">Task Description</label>
+      <input id="task-desc"
+             type="text"
+             pInputText
+             formControlName="text"
+             required>
+    </div>
+    <div class="field col-4">
+      <label for="task-due-date">Due Date</label>
+      <p-calendar appendTo="body"
+                  inputId="task-due-date"
+                  formControlName="dueDate"
+                  [minDate]="today"></p-calendar>
+    </div>
+    <div class="field col-8">
+      <label for="task-due-date">Priority</label>
+      <p-selectButton [options]="priorities"
+                      formControlName="priority"
+                      optionLabel="label"
+                      optionValue="value"></p-selectButton>
+    </div>
+  </div>
+  <div class="flex justify-content-end mt-5">
+    <button pButton type="button" label="Cancel" class="p-button-outlined mr-2"></button>
+    <button pButton type="submit" label="Add task" icon="pi pi-plus"></button>
+  </div>
+</form>
+
+

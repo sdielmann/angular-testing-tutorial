@@ -2,7 +2,7 @@
   <ng-template pTemplate="header">
     <p-toolbar>
       <div class="p-toolbar-group-left">
-        <p-button label="New" icon="pi pi-plus"></p-button>
+        <p-button label="New" icon="pi pi-plus" (onClick)="addNewTask()"></p-button>
       </div>
       <div class="p-toolbar-group-right">
         <span class="p-input-icon-left md:mr-2">
@@ -15,9 +15,9 @@
   </ng-template>
 
   <ul class="todo-list">
-    <li *ngFor="let todo of todos" class="todo-list__item">
+    <li *ngFor="let todo of todos" class="todo-list__item" role="listitem">
       <div class="todo-list__item__cb">
-        <p-checkbox [binary]="true" [(ngModel)]="todo.done"></p-checkbox>
+        <p-checkbox [binary]="true"></p-checkbox>
       </div>
       <div class="todo-list__item__info">
         <div class="todo-list__item__info__text">{{ todo.text }}</div>

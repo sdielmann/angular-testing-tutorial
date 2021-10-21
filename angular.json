@@ -22,6 +22,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "sourceMap": {
+              "vendor": false,
+              "scripts": true,
+              "styles": true,
+              "hidden": false
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets"

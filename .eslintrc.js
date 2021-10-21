@@ -55,6 +55,10 @@ module.exports = {
               'private-static-method'
             ]
           }
+        ],
+        'no-underscore-dangle': [
+          "error",
+          {"allowAfterThis": true }
         ]
       }
     },
