@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-interface AppLink {
-  url: string;
-  label: string;
-}
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +7,15 @@ interface AppLink {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  readonly links: AppLink[] = [{
-    url: '/',
-    label: 'Start'
+  readonly menuItems: MenuItem[] = [{
+    routerLink: '/',
+    label: 'Home',
+    icon: 'pi pi-fw pi-home'
   }, {
-    url: '/users',
+    routerLink: '/users',
     label: 'Users'
+  }, {
+    routerLink: '/todos',
+    label: 'Your Todos'
   }];
 }

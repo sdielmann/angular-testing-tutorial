@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~primeflex/primeflex.css";
 
 html, body {
   margin: 0;
@@ -8,15 +8,13 @@ html, body {
 body {
   font-family: Roboto, Helvetica, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
-  color: #292929;
 }
 
 a {
-  color: #105b82;
+  color: var(--primary-color);
   text-decoration: none;
 
   &:hover {
-    color: #198fcd;
     text-decoration: underline;
   }
 }

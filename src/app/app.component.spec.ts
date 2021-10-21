@@ -1,21 +1,32 @@
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { Menubar } from 'primeng/menubar';
+import { MockComponent, ngMocks } from 'ng-mocks';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
 
-  beforeEach(async () => {
+  /* We would like to reuse the same TestBed in every test. ngMocks.faster suppresses reset of TestBed after each test
+   * and allows to use TestBed, MockBuilder and MockRender in beforeAll. See https://ng-mocks.sudo.eu/api/ngMocks/faster */
+  ngMocks.faster();
+
+  beforeAll(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([])
       ],
       declarations: [
-        AppComponent
-      ],
+        AppComponent,
+        /* We do not want to test third-party dependencies. The PrimeNG menu will therefore be mocked. */
+        MockComponent(Menubar)
+      ]
     }).compileComponents();
+  });
 
+  beforeEach(async () => {
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
     fixture.detectChanges();
@@ -30,13 +41,9 @@ describe('AppComponent', () => {
   });
 
   it('should have links to all sub-pages', () => {
-    const links = fixture.debugElement.$$('a.app-nav__link');
-
-    expect(links.length).toEqual(2);
-
-    /* I would suggest not to test the "click" itself here, because we can expect Angular itself to work. The routerLink
-    * directive also sets the href attribute on the elements, so we can test if they have been set. */
-    expect(links[0].nativeElement).toHaveAttribute('href', '/');
-    expect(links[1].nativeElement).toHaveAttribute('href', '/users');
+    const menu = fixture.debugElement.query(By.directive(Menubar));
+    expect(menu).toBeTruthy();
+    const menuComponent = menu.context;
+    expect(menuComponent?.model).toEqual(app.menuItems);
   });
 });

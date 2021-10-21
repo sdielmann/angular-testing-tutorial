@@ -1,16 +1,7 @@
 <!-- Menu -->
 <header role="banner" class="app-header">
   <nav class="app-nav">
-    <ul>
-      <li *ngFor="let link of links">
-        <a [routerLink]="link.url"
-           [routerLinkActiveOptions]="{exact: true}"
-           routerLinkActive="active"
-           class="app-nav__link">
-          {{ link.label }}
-        </a>
-      </li>
-    </ul>
+    <p-menubar [model]="menuItems" class="app-header__menu"></p-menubar>
   </nav>
 </header>
 
