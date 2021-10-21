@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+::ng-deep {
+  .p-card .p-card-body {
+    padding: 0;
+  }
+
+  .p-toolbar {
+    border: 0;
+    background: none;
+    padding-bottom: 0;
+  }
+}
+
+.todo-list {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: flex;
+
+    &__cb,
+    &__info {
+      padding: 1rem 1.25rem;
+    }
+
+    &__info__created-at {
+      font-size: 0.75rem;
+      color: var(--text-color-secondary);
+    }
+  }
+}

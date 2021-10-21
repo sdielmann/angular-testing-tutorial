@@ -1,0 +1,28 @@
+<p-card>
+  <ng-template pTemplate="header">
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <p-button label="New" icon="pi pi-plus"></p-button>
+      </div>
+      <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left md:mr-2">
+          <i class="pi pi-search"></i>
+          <input type="search" pInputText placeholder="Search">
+        </span>
+      </div>
+    </p-toolbar>
+    <p-divider class="m-0"></p-divider>
+  </ng-template>
+
+  <ul class="todo-list">
+    <li *ngFor="let todo of todos" class="todo-list__item">
+      <div class="todo-list__item__cb">
+        <p-checkbox [binary]="true" [(ngModel)]="todo.done"></p-checkbox>
+      </div>
+      <div class="todo-list__item__info">
+        <div class="todo-list__item__info__text">{{ todo.text }}</div>
+        <div class="todo-list__item__info__created-at">{{ todo.createdAt | fromNow }}</div>
+      </div>
+    </li>
+  </ul>
+</p-card>
