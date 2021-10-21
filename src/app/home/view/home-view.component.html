@@ -1,12 +1,13 @@
 <div class="hero grid grid-nogutter surface-section text-800">
   <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
     <section>
-      <span class="block text-6xl font-bold mb-1">Kickstart your app</span>
-      <div class="text-6xl text-primary font-bold mb-3">with test automation</div>
+      <h1>
+        <span class="block text-6xl font-bold mb-1">Kickstart your app </span>
+        <span class="block text-6xl text-primary font-bold mb-3">with test automation</span>
+      </h1>
       <p class="mt-0 mb-4 text-700 line-height-3">
         Start testing your application now with automated tests and never fear regression bugs in agile development again.
       </p>
-
       <button pButton pRipple label="Learn More" type="button" class="mr-3 p-button-raised"></button>
       <button pButton pRipple label="Live Demo" type="button" class="p-button-outlined"></button>
     </section>
@@ -27,12 +28,12 @@
   </div>
   <div class="text-700 text-sm mb-6">Test automation has many advantages you can profit from.</div>
   <div class="grid">
-    <div class="col-12 md:col-4 mb-4 px-5" *ngFor="let f of features">
+    <div class="col-12 md:col-4 mb-4 px-5 benefit" *ngFor="let f of features">
             <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
                 <i class="pi pi-{{ f.icon }} text-4xl text-blue-500"></i>
             </span>
-      <div class="text-900 mb-3 font-medium">{{ f.title }}</div>
-      <span class="text-700 text-sm line-height-3">{{ f.text }}</span>
+      <div class="text-900 mb-3 font-medium benefit__title">{{ f.title }}</div>
+      <span class="text-700 text-sm line-height-3 benefit__desc">{{ f.text }}</span>
     </div>
   </div>
 </div>
