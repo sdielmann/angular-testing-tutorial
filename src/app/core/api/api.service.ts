@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from './models';
+import { User, Todo } from './models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,6 +13,22 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get(`${this.baseUrl}/users`) as Observable<User[]>;
+    return this.http.get<User[]>(`${this.baseUrl}/users`);
+  }
+
+  getTodos(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.baseUrl}/todos`);
+  }
+
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`${this.baseUrl}/todos`, todo);
+  }
+
+  deleteTodo(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/todos/${id}`);
+  }
+
+  patchTodo(id: string, todo: Partial<Todo>): Observable<Todo> {
+    return this.http.patch<Todo>(`${this.baseUrl}/todos/${id}`, todo);
   }
 }

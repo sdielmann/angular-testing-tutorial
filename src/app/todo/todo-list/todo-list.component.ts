@@ -1,7 +1,10 @@
-import { Component, Inject, Input, OnDestroy } from '@angular/core';
-import { Todo } from '../model/Todo';
+import { Component, Inject, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
+import { Todo } from '@app/models';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddNewTaskDialogComponent } from '../add-new-task-dialog/add-new-task-dialog.component';
+import { TodoService } from '../todo.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,20 +12,32 @@ import { AddNewTaskDialogComponent } from '../add-new-task-dialog/add-new-task-d
   styleUrls: ['./todo-list.component.scss'],
   providers: [DialogService]
 })
-export class TodoListComponent implements OnDestroy {
+export class TodoListComponent implements OnInit, OnDestroy {
 
-  @Input() todos: Todo[] = [
-    {
-      id: '0',
-      createdAt: new Date().toISOString(),
-      text: 'Your first Todo',
-      done: false
-    }
-  ];
+  todos$: Observable<Todo[]>;
+  done$: Observable<Todo[]>;
+
+  clearingDoneTasks = false;
 
   private _dialogRef: DynamicDialogRef;
 
-  constructor(@Inject(DialogService) private dialogService: DialogService) { }
+  constructor(
+    @Inject(TodoService) private todoService: TodoService,
+    @Inject(DialogService) private dialogService: DialogService
+  ) {
+    this.todos$ = todoService.todos$.pipe(map(list => list.filter(todo => !todo.done)));
+    this.done$ = todoService.todos$.pipe(map(list => list.filter(todo => todo.done)));
+  }
+
+  ngOnInit() {
+    this.updateTodos();
+  }
+
+  ngOnDestroy() {
+    if (this._dialogRef) {
+      this._dialogRef.close();
+    }
+  }
 
   addNewTask(): void {
     this._dialogRef = this.dialogService.open(AddNewTaskDialogComponent, {
@@ -36,9 +51,20 @@ export class TodoListComponent implements OnDestroy {
     this._dialogRef.onClose.subscribe(res => console.log(res));
   }
 
-  ngOnDestroy() {
-    if (this._dialogRef) {
-      this._dialogRef.close();
-    }
+  setDone(id: string, done: boolean) {
+    this.todoService.setDone(id, done).subscribe(n => console.log(n));
   }
+
+  updateTodos() {
+    this.todoService.loadTodos().subscribe();
+  }
+
+  clearDoneTasks() {
+    this.clearingDoneTasks = true;
+    this.todoService.clearDoneTasks().subscribe({
+      complete: () => { this.clearingDoneTasks = false }
+    });
+  }
+
+  trackById: TrackByFunction<Todo> = (i: number, item: Todo) => item.id;
 }

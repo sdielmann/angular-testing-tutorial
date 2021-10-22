@@ -14,15 +14,78 @@
     <p-divider class="m-0"></p-divider>
   </ng-template>
 
-  <ul class="todo-list">
-    <li *ngFor="let todo of todos" class="todo-list__item" role="listitem">
-      <div class="todo-list__item__cb">
-        <p-checkbox [binary]="true"></p-checkbox>
-      </div>
-      <div class="todo-list__item__info">
-        <div class="todo-list__item__info__text">{{ todo.text }}</div>
-        <div class="todo-list__item__info__created-at">{{ todo.createdAt | fromNow }}</div>
-      </div>
-    </li>
-  </ul>
+  <ng-container *ngIf="(todos$ | async) as todos; else loaderTpl">
+    <ul *ngIf="todos.length > 0; else noMoreTodosTpl" class="todo-list">
+      <li *ngFor="let todo of todos; trackBy: trackById"
+          [class.done]="todo.done"
+          class="todo-list__item"
+          role="listitem">
+        <div class="todo-list__item__cb">
+          <p-checkbox [binary]="true"
+                      [ngModel]="todo.done"
+                      (ngModelChange)="setDone(todo.id, $event)"
+                      [inputId]="'todo-cb-' + todo.id"></p-checkbox>
+        </div>
+        <div class="todo-list__item__info">
+          <div class="todo-list__item__info__text">
+            <label [attr.for]="'todo-cb-' + todo.id">{{ todo.text }}</label>
+          </div>
+          <div class="todo-list__item__info__created-at">{{ todo.createdAt | fromNow }}</div>
+        </div>
+        <div class="todo-list__item__prio">
+          <span class="todo-list__item__prio__2" *ngIf="todo.priority === 2" title="High Priority">!!</span>
+          <span class="todo-list__item__prio__1" *ngIf="todo.priority === 1" title="Medium Priority">!</span>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="(done$ | async) as todos">
+    <ng-container *ngIf="todos.length > 0">
+      <p-divider align="left" class="mt-4">
+        <div class="inline-flex align-items-center">
+          <b>Done Tasks</b>
+          <button pButton label="Clear done tasks"
+                  (click)="clearDoneTasks()"
+                  [disabled]="clearingDoneTasks"
+                  [icon]="clearingDoneTasks ? 'pi pi-spin pi-spinner' : 'pi pi-trash'"
+                  class="p-button-outlined ml-3"></button>
+        </div>
+      </p-divider>
+
+      <ul class="todo-list">
+        <li *ngFor="let todo of todos; trackBy: trackById"
+            [class.done]="todo.done"
+            class="todo-list__item"
+            role="listitem">
+          <div class="todo-list__item__cb">
+            <p-checkbox [binary]="true"
+                        [ngModel]="todo.done"
+                        (ngModelChange)="setDone(todo.id, $event)"
+                        [inputId]="'todo-cb-' + todo.id"></p-checkbox>
+          </div>
+          <div class="todo-list__item__info">
+            <div class="todo-list__item__info__text">
+              <label [attr.for]="'todo-cb-' + todo.id">{{ todo.text }}</label>
+            </div>
+            <div class="todo-list__item__info__created-at">{{ todo.createdAt | fromNow }}</div>
+          </div>
+          <div class="todo-list__item__prio">
+            <span class="todo-list__item__prio__2" *ngIf="todo.priority === 2" title="High Priority">!!</span>
+            <span class="todo-list__item__prio__1" *ngIf="todo.priority === 1" title="Medium Priority">!</span>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
 </p-card>
+
+<ng-template #noMoreTodosTpl>
+  <p class="text-center p-text-secondary mt-0 mb-4">You have no more tasks to do. Hooray!</p>
+</ng-template>
+
+<ng-template #loaderTpl>
+  <div class="loader text-center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>

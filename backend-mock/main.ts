@@ -9,14 +9,10 @@ const server = jsonServer.create();
 const db = new Database();
 const router = jsonServer.router(db.getPlainDatabase());
 
-// Customize the ID property that is used by the JSON Server internally to identify the objects
-// @ts-ignore
-router.db._.id = '_id';
-
 // Intentional delay of requests
-server.use((req, res, next) => {
+/*server.use((req, res, next) => {
   setTimeout(next,1000);
-});
+});*/
 
 // General middleware
 server.use(expressLogger);

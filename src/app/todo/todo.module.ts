@@ -8,11 +8,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { CheckboxModule } from 'primeng/checkbox';
-import { PaginatorModule } from 'primeng/paginator';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AddNewTaskDialogComponent } from './add-new-task-dialog/add-new-task-dialog.component';
 import { CalendarModule } from 'primeng/calendar';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
 const routes: Routes = [
@@ -32,6 +31,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+    FormsModule,
     ToolbarModule,
     CalendarModule,
     CardModule,
