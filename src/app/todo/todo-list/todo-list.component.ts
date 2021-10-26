@@ -3,7 +3,7 @@ import { Todo } from '@app/models';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddNewTaskDialogComponent } from '../add-new-task-dialog/add-new-task-dialog.component';
 import { TodoService } from '../service/todo.service';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
@@ -51,8 +51,6 @@ export class TodoListComponent implements OnInit, OnDestroy {
       modal: true,
       closeOnEscape: true
     });
-
-    this._dialogRef.onClose.subscribe(res => console.log(res));
   }
 
   setDone(id: string, done: boolean) {
@@ -72,7 +70,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   trackById: TrackByFunction<Todo> = (i: number, item: Todo) => item.id;
 
-  private sortTodos = (list: Todo[]) => list.sort((a, b) => {
+  private sortTodos = (list: Todo[]) => list.slice().sort((a, b) => {
     if (a.priority !== b.priority) {
       return a.priority > b.priority ? -1 : 1;
     }
