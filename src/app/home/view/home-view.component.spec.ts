@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ngMocks } from 'ng-mocks';
 
 import { HomeViewComponent } from './home-view.component';
-import { ngMocks } from 'ng-mocks';
 
 describe('HomeViewComponent', () => {
   let component: HomeViewComponent;
