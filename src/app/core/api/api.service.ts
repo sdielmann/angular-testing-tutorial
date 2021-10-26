@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get<Todo[]>(`${this.baseUrl}/todos`);
   }
 
-  addTodo(todo: Todo): Observable<Todo> {
+  addTodo(todo: Partial<Todo>): Observable<Todo> {
     return this.http.post<Todo>(`${this.baseUrl}/todos`, todo);
   }
 
