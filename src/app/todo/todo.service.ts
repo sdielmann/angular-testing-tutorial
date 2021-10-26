@@ -11,8 +11,7 @@ export class TodoService {
 
   get todos$(): Observable<Todo[]> {
     return this.todos.asObservable().pipe(
-      filter(list => Array.isArray(list)),
-      map(this.sortTodos)
+      filter(list => Array.isArray(list))
     );
   }
 
@@ -66,15 +65,5 @@ export class TodoService {
     this.todos.next(todos);
   }
 
-  private sortTodos = (list: Todo[]) => list.sort((a, b) => {
-    if (a.priority !== b.priority) {
-      return a.priority > b.priority ? -1 : 1;
-    }
 
-    if (a.createdAt !== b.createdAt) {
-      return a.createdAt > b.createdAt ? -1 : 1;
-    }
-
-    return 0;
-  });
 }

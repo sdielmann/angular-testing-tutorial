@@ -25,8 +25,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     @Inject(TodoService) private todoService: TodoService,
     @Inject(DialogService) private dialogService: DialogService
   ) {
-    this.todos$ = todoService.todos$.pipe(map(list => list.filter(todo => !todo.done)));
-    this.done$ = todoService.todos$.pipe(map(list => list.filter(todo => todo.done)));
+    this.todos$ = todoService.todos$.pipe(map(this.sortTodos));
   }
 
   ngOnInit() {
@@ -67,4 +66,16 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   trackById: TrackByFunction<Todo> = (i: number, item: Todo) => item.id;
+
+  private sortTodos = (list: Todo[]) => list.sort((a, b) => {
+    if (a.priority !== b.priority) {
+      return a.priority > b.priority ? -1 : 1;
+    }
+
+    if (a.createdAt !== b.createdAt) {
+      return a.createdAt > b.createdAt ? -1 : 1;
+    }
+
+    return 0;
+  });
 }
