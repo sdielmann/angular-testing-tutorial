@@ -3,6 +3,7 @@
     <div class="field col-12">
       <label for="task-desc">Description</label>
       <input id="task-desc"
+             data-qa="task-desc-input"
              type="text"
              pInputText
              formControlName="text"
@@ -24,9 +25,11 @@
   </div>
   <div class="flex justify-content-end mt-5">
     <button pButton type="button" label="Cancel" class="p-button-outlined mr-2"
+            data-qa="close-btn"
             (click)="close()"></button>
     <button pButton type="submit" label="Add task"
             [icon]="saving ? 'pi pi-spin pi-spinner' : 'pi pi-plus'"
+            data-qa="submit-btn"
             [disabled]="saving"></button>
   </div>
 </form>
