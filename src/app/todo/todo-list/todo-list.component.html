@@ -13,7 +13,10 @@
       <div class="p-toolbar-group-right">
         <span class="p-input-icon-left md:mr-2">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search">
+          <input [formControl]="searchForm"
+                 type="search"
+                 pInputText
+                 placeholder="Search">
         </span>
       </div>
     </p-toolbar>

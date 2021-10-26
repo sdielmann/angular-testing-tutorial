@@ -3,8 +3,9 @@ import { Todo } from '@app/models';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddNewTaskDialogComponent } from '../add-new-task-dialog/add-new-task-dialog.component';
 import { TodoService } from '../todo.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,8 +16,7 @@ import { map } from 'rxjs/operators';
 export class TodoListComponent implements OnInit, OnDestroy {
 
   todos$: Observable<Todo[]>;
-  done$: Observable<Todo[]>;
-
+  searchForm = new FormControl('');
   clearingDoneTasks = false;
 
   private _dialogRef: DynamicDialogRef;
@@ -25,7 +25,12 @@ export class TodoListComponent implements OnInit, OnDestroy {
     @Inject(TodoService) private todoService: TodoService,
     @Inject(DialogService) private dialogService: DialogService
   ) {
-    this.todos$ = todoService.todos$.pipe(map(this.sortTodos));
+    this.todos$ = combineLatest([
+      todoService.todos$.pipe(map(this.sortTodos)),
+      this.searchForm.valueChanges.pipe(startWith(''))
+    ]).pipe(
+      map(([list, searchTerm]) => list.filter(todo => todo.text.toLowerCase().includes(searchTerm.toLowerCase())))
+    );
   }
 
   ngOnInit() {
@@ -61,7 +66,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   clearDoneTasks() {
     this.clearingDoneTasks = true;
     this.todoService.clearDoneTasks().subscribe({
-      complete: () => { this.clearingDoneTasks = false }
+      complete: () => { this.clearingDoneTasks = false; }
     });
   }
 

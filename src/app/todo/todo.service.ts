@@ -26,14 +26,6 @@ export class TodoService {
     );
   }
 
-  setDone(id: string, done: boolean) {
-    // Optimistically update the To-Do instead of waiting for the request
-    this.updateTodoById(id, { done });
-    return this.api.patchTodo(id, { done }).pipe(
-      tap(next => { this.updateTodoById(id, next); })
-    );
-  }
-
   addNewTodo(todo: Todo): Observable<any> {
     return this.api.addTodo(todo).pipe(
       tap(newTodo => {
@@ -41,6 +33,14 @@ export class TodoService {
         todos.push(newTodo);
         this.todos.next(todos);
       })
+    );
+  }
+
+  setDone(id: string, done: boolean) {
+    // Optimistically update the To-Do instead of waiting for the request
+    this.updateTodoById(id, { done });
+    return this.api.patchTodo(id, { done }).pipe(
+      tap(next => { this.updateTodoById(id, next); })
     );
   }
 
@@ -64,6 +64,4 @@ export class TodoService {
 
     this.todos.next(todos);
   }
-
-
 }
