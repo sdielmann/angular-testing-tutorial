@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
-import { ApiService } from '../core/api/api.service';
+import { ApiService } from '../../core/api/api.service';
 import { Todo } from '@app/models';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
-import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

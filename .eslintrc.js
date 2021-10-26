@@ -2,7 +2,8 @@ module.exports = {
   root: true,
   ignorePatterns: [
     'e2e/**/*',
-    'projects/**/*'
+    'projects/**/*',
+    '**/*.js'
   ],
   overrides: [
     {

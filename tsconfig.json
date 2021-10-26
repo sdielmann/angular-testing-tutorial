@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -20,7 +19,8 @@
     ],
     "paths": {
       "@app/models": ["src/app/core/api/models/index.ts"],
-      "@app/shared": ["src/app/shared/index.ts"]
+      "@app/shared": ["src/app/shared/index.ts"],
+      "@testing/utils": ["testing/util/index.ts"]
     }
   },
   "angularCompilerOptions": {

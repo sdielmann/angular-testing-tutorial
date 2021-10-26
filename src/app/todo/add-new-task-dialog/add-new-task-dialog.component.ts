@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TodoService } from '../todo.service';
+import { TodoService } from '../service/todo.service';
 
 @Component({
   selector: 'app-add-new-task-dialog',

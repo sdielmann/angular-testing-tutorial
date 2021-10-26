@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit, TrackByFunction } from '@angular/
 import { Todo } from '@app/models';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddNewTaskDialogComponent } from '../add-new-task-dialog/add-new-task-dialog.component';
-import { TodoService } from '../todo.service';
+import { TodoService } from '../service/todo.service';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
