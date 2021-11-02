@@ -27,6 +27,7 @@
     <ul *ngIf="todos.length > 0; else noMoreTodosTpl" class="todo-list" data-qa="todo-list">
       <li *ngFor="let todo of todos; trackBy: trackById"
           [class.done]="todo.done"
+          [attr.data-priority]="todo.priority"
           class="todo-list__item"
           role="listitem">
         <div class="todo-list__item__cb">

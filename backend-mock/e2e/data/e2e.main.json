@@ -1,0 +1,26 @@
+{
+  "users": [],
+  "todos": [
+    {
+      "id": "0",
+      "priority": 0,
+      "done": false,
+      "text": "Clean the dishes",
+      "createdAt": "2021-10-28T23:17:59.064Z"
+    },
+    {
+      "id": "1",
+      "priority": 0,
+      "done": false,
+      "text": "Do my homework",
+      "createdAt": "2021-10-26T15:26:02.463Z"
+    },
+    {
+      "id": "2",
+      "priority": 2,
+      "done": false,
+      "text": "Watch Netflix",
+      "createdAt": "2021-10-30T01:17:12.292Z"
+    }
+  ]
+}

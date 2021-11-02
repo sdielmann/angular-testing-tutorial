@@ -51,7 +51,6 @@ describe('TodoListComponent', () => {
 
   it('should display a list of tasks', () => {
     const lItems = fixture.debugElement.$$('.todo-list__item');
-    const todos = todos$.getValue();
 
     // Check list
     expect(lItems.length).toEqual(3);

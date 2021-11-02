@@ -1,4 +1,4 @@
-import { User, Todo } from '../../src/app/core/api/models';
+import { Todo, User } from '../../src/app/core/api/models';
 import { logger, MockDatabase } from '../util';
 import * as faker from 'faker/locale/de';
 
@@ -7,7 +7,7 @@ interface MockBackendData {
   todos: Todo[];
 }
 
-export class Database extends MockDatabase<MockBackendData>{
+export class Database extends MockDatabase<MockBackendData> {
 
   protected init() {
     this.db = {
@@ -29,7 +29,7 @@ export class Database extends MockDatabase<MockBackendData>{
         fullName: faker.name.findName(firstName, lastName),
         email: faker.internet.email(firstName, lastName),
         phone: faker.phone.phoneNumberFormat(2),
-        age: faker.datatype.number( { min: 18, max: 65, precision: 1 })
+        age: faker.datatype.number({ min: 18, max: 65, precision: 1 })
       };
       users.push(user);
     }
@@ -48,7 +48,7 @@ export class Database extends MockDatabase<MockBackendData>{
         priority: 0,
         done: false,
         text: faker.git.commitMessage(),
-        createdAt: faker.date.recent(7).toISOString(),
+        createdAt: faker.date.recent(7).toISOString()
       };
       todos.push(todo);
     }

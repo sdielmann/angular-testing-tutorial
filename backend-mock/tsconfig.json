@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "module": "commonjs",
     "sourceMap": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   }
 }
