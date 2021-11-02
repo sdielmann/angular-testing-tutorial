@@ -64,18 +64,19 @@ describe('TodoListComponent', () => {
     // Check Checkbox input bindings
     const cb = ngMocks.find(lItems[0], 'p-checkbox');
     expect(cb).toBeTruthy();
+    const expectedTodo = todos$.getValue()[2]; // This should be the first item due to sorting
     expect(ngMocks.input(cb, 'binary')).toBe(true);
-    expect(ngMocks.input(cb, 'ngModel')).toBe(todos[0].done);
-    expect(ngMocks.input(cb, 'inputId')).toBe('todo-cb-' + todos[0].id);
+    expect(ngMocks.input(cb, 'ngModel')).toBe(expectedTodo.done);
+    expect(ngMocks.input(cb, 'inputId')).toBe('todo-cb-' + expectedTodo.id);
 
     // Check Checkbox output bindings
     ngMocks.output(cb, 'ngModelChange').emit(true);
-    expect(TestBed.inject(TodoService).setDone).toHaveBeenCalledWith(todos[0].id, true);
+    expect(TestBed.inject(TodoService).setDone).toHaveBeenCalledWith(expectedTodo.id, true);
   });
 
   it('should add a styling class when a task is done', () => {
-    const todos = todos$.getValue().concat();
-    todos[0].done = true;
+    const todos = todos$.getValue().slice();
+    todos[2].done = true;
     todos$.next(todos);
     fixture.detectChanges();
 
