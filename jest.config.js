@@ -1,3 +1,6 @@
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const { compilerOptions } = require('./tsconfig.json');
+
 module.exports = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/testing/jest-setup.ts'],
@@ -10,6 +13,7 @@ module.exports = {
   transform: {
     "^.+\\.svg$": 'ts-jest'
   },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
   globals: {
     "ts-jest": {
       tsconfig: "<rootDir>/tsconfig.spec.json",

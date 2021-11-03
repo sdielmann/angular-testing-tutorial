@@ -1,16 +1,7 @@
 <!-- Menu -->
 <header role="banner" class="app-header">
   <nav class="app-nav">
-    <ul>
-      <li *ngFor="let link of links">
-        <a [routerLink]="link.url"
-           [routerLinkActiveOptions]="{exact: true}"
-           routerLinkActive="active"
-           class="app-nav__link">
-          {{ link.label }}
-        </a>
-      </li>
-    </ul>
+    <p-menubar [model]="menuItems" class="app-header__menu"></p-menubar>
   </nav>
 </header>
 
@@ -21,6 +12,7 @@
 
 <!-- Footer -->
 <footer class="app-footer">
+  <p>This app is powered by <a href="https://www.primefaces.org/primeng/" target="_blank">PrimeNG</a>.</p>
   <p>Did this tutorial help you? Follow my blog at <a href="https://www.steffendielmann.com" target="_blank">
     www.steffendielmann.com</a> to get more tips and tricks on Angular.</p>
 </footer>

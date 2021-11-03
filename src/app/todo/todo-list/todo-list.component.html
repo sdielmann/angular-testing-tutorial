@@ -1,0 +1,62 @@
+<p-card>
+  <ng-template pTemplate="header">
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <button pButton label="New" icon="pi pi-plus"
+                (click)="addNewTask()"></button>
+        <button pButton label="Clear done tasks"
+                (click)="clearDoneTasks()"
+                [disabled]="clearingDoneTasks"
+                [icon]="clearingDoneTasks ? 'pi pi-spin pi-spinner' : 'pi pi-trash'"
+                class="p-button-outlined ml-3"></button>
+      </div>
+      <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left md:mr-2">
+          <i class="pi pi-search"></i>
+          <input [formControl]="searchForm"
+                 type="search"
+                 pInputText
+                 placeholder="Search">
+        </span>
+      </div>
+    </p-toolbar>
+    <p-divider class="m-0"></p-divider>
+  </ng-template>
+
+  <ng-container *ngIf="(todos$ | async) as todos; else loaderTpl">
+    <ul *ngIf="todos.length > 0; else noMoreTodosTpl" class="todo-list" data-qa="todo-list">
+      <li *ngFor="let todo of todos; trackBy: trackById"
+          [class.done]="todo.done"
+          [attr.data-priority]="todo.priority"
+          class="todo-list__item"
+          role="listitem">
+        <div class="todo-list__item__cb">
+          <p-checkbox [binary]="true"
+                      [ngModel]="todo.done"
+                      (ngModelChange)="setDone(todo.id, $event)"
+                      [inputId]="'todo-cb-' + todo.id"></p-checkbox>
+        </div>
+        <div class="todo-list__item__info">
+          <div class="todo-list__item__info__text">
+            <label [attr.for]="'todo-cb-' + todo.id">{{ todo.text }}</label>
+          </div>
+          <div class="todo-list__item__info__created-at">{{ todo.createdAt | fromNow }}</div>
+        </div>
+        <div class="todo-list__item__prio">
+          <span class="todo-list__item__prio__2" *ngIf="todo.priority === 2" title="High Priority">!!</span>
+          <span class="todo-list__item__prio__1" *ngIf="todo.priority === 1" title="Medium Priority">!</span>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+</p-card>
+
+<ng-template #noMoreTodosTpl>
+  <p class="text-center p-text-secondary mt-0 mb-4" data-qa="empty-state">You have no more tasks to do. Hooray!</p>
+</ng-template>
+
+<ng-template #loaderTpl>
+  <div class="loader text-center" data-qa="loader">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>

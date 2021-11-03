@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  margin: 2rem 0;
+  font-size: 14px;
+}
+
+::ng-deep {
+  .p-card .p-card-body {
+    padding: 0;
+  }
+
+  .p-toolbar {
+    border: 0;
+    background: none;
+    padding-bottom: 0;
+  }
+}
+
+.todo-list {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: flex;
+
+    &:hover {
+      background: var(--surface-hover);
+    }
+
+    &__cb,
+    &__prio,
+    &__info {
+      padding: 1rem 1.25rem;
+    }
+
+    &__info {
+      flex: 1 0 auto;
+    }
+
+    &__info__text > label {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        transform: scaleX(0);
+        transform-origin: left center;
+        background: currentColor;
+        transition: 200ms ease;
+      }
+    }
+
+    &__info__created-at {
+      font-size: 0.75rem;
+      color: var(--text-color-secondary);
+    }
+
+    &__prio__1,
+    &__prio__2 {
+      color: var(--pink-500);
+      font-weight: bold;
+      user-select: none;
+    }
+
+    &.done {
+      color: var(--text-color-secondary);
+
+      .todo-list__item__info__text > label::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

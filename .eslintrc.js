@@ -2,7 +2,8 @@ module.exports = {
   root: true,
   ignorePatterns: [
     'e2e/**/*',
-    'projects/**/*'
+    'projects/**/*',
+    '**/*.js'
   ],
   overrides: [
     {
@@ -55,6 +56,10 @@ module.exports = {
               'private-static-method'
             ]
           }
+        ],
+        'no-underscore-dangle': [
+          "error",
+          {"allowAfterThis": true }
         ]
       }
     },

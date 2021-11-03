@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  font-size: 14px;
+}
+
+::ng-deep .prio {
+  color: var(--pink-500);
+  font-weight: bold;
+  user-select: none;
+}

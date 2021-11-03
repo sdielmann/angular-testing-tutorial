@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeModule } from '../../home/home.module';
 import { UserModule } from '../../user/user.module';
+import { TodoModule } from '../../todo/todo.module';
 
 export const APP_ROUTES: Routes = [{
   path: '',
@@ -8,4 +9,7 @@ export const APP_ROUTES: Routes = [{
 }, {
   path: 'users',
   loadChildren: () => UserModule
+}, {
+  path: 'todos',
+  loadChildren: () => TodoModule
 }];

@@ -1,3 +1,11 @@
 :host {
   display: block;
 }
+
+.hero {
+  background: var(--blue-900);
+
+  &__image-wrapper {
+    max-height: 600px;
+  }
+}

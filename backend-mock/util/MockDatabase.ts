@@ -8,7 +8,7 @@ export abstract class MockDatabase<T> {
     this.init();
   }
 
-  protected abstract init()
+  protected abstract init();
 
   getPlainDatabase(): T {
     return this.db;
